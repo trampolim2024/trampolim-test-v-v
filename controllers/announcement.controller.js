@@ -1,6 +1,5 @@
 import Announcement from '../models/announcement.model.js';
 
-// Função para criar um novo anúncio (com upload de arquivo)
 export const createAnnouncement = async (req, res, next) => {
   try {
     const { dataInicioSubmissoes, dataFimSubmissoes, inicioAvaliacoes, fimAvaliacoes } = req.body;
@@ -24,7 +23,6 @@ export const createAnnouncement = async (req, res, next) => {
   }
 };
 
-// Função para pegar todos os anúncios
 export const getAllAnnouncements = async (req, res, next) => {
   try {
     const announcements = await Announcement.find();
@@ -34,7 +32,6 @@ export const getAllAnnouncements = async (req, res, next) => {
   }
 };
 
-// Função para pegar um anúncio pelo ID
 export const getAnnouncementById = async (req, res, next) => {
   try {
     const announcement = await Announcement.findById(req.params.id);
@@ -47,7 +44,6 @@ export const getAnnouncementById = async (req, res, next) => {
   }
 };
 
-// Função para atualizar um anúncio
 export const updateAnnouncement = async (req, res, next) => {
   try {
     const updatedAnnouncement = await Announcement.findByIdAndUpdate(req.params.id, req.body, { new: true });
@@ -60,7 +56,6 @@ export const updateAnnouncement = async (req, res, next) => {
   }
 };
 
-// Função para deletar um anúncio
 export const deleteAnnouncement = async (req, res, next) => {
   try {
     const deletedAnnouncement = await Announcement.findByIdAndDelete(req.params.id);

@@ -2,19 +2,17 @@ import Project from '../models/project.model.js';
 
 export const createProject = async (req, res, next) => {
   try {
-    // Extrai o userId do corpo da requisição
     const { userId, ...projectData } = req.body;
 
     if (!userId) {
       return res.status(400).json({ success: false, message: 'ID do usuário não fornecido' });
     }
 
-    // Cria o projeto com os dados recebidos, incluindo o userId
     const project = await Project.create({ ...projectData, userId });
 
     res.status(201).json({ success: true, data: project });
   } catch (e) {
-    console.error('Erro ao criar projeto:', e); // Log do erro
+    console.error('Erro ao criar projeto:', e); 
     next(e);
   }
 };
@@ -43,7 +41,7 @@ export const getProjectById = async (req, res, next) => {
 export const getProjectsByUserId = async (req, res, next) => {
   try {
     const userId = req.params.userId;
-    const projects = await Project.find({ userId: userId }); // Certifique-se de que o campo userId existe no modelo Project
+    const projects = await Project.find({ userId: userId }); 
     if (!projects || projects.length === 0) {
       return res.status(404).json({ success: false, message: 'Nenhum projeto encontrado para este usuário' });
     }

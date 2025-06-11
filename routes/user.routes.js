@@ -9,7 +9,6 @@ import authorize from '../middlewares/auth.middleware.js';
 
 const userRouter = Router();
 
-// Definindo as rotas para o CRUD de usuários
 userRouter.get('/', getAllUsers);
 userRouter.get('/:id', getUserById);
 userRouter.put('/:id', updateUser);

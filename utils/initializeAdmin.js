@@ -35,7 +35,7 @@ const initializeAdmin = async () => {
             console.log('⚡ Superusuário admin já existe.');
         }
     } catch (error) {
-        console.error('❌ Erro ao criar o superusuário admin:', error);
+        console.error('Erro ao criar o superusuário admin:', error);
     }
 };
 

@@ -1,5 +1,5 @@
 import express from 'express';
-import cors from 'cors'; // Importar o pacote cors
+import cors from 'cors'; 
 import fs from 'fs';
 import { PORT } from './config/env.js';
 import userRouter from './routes/user.routes.js';
@@ -11,23 +11,18 @@ import initializeAdmin from './utils/initializeAdmin.js';
 
 const app = express();
 
-// Criar pasta 'uploads' se não existir
 const uploadDir = 'uploads';
 if (!fs.existsSync(uploadDir)) {
   fs.mkdirSync(uploadDir);
 }
 
-// Middleware para parsing de JSON e formulários
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Middleware CORS
-app.use(cors()); // Adicionar o middleware cors
+app.use(cors()); 
 
-// Servir arquivos estáticos da pasta 'uploads'
 app.use('/uploads', express.static('uploads'));
 
-// Definição das rotas
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/announcements', announcementRouter);
@@ -41,10 +36,10 @@ app.listen(PORT, async () => {
   console.log(`🚀 Server is running on http://localhost:${PORT}`);
 
   try {
-    await connectToDataBase(); // Conecta ao banco de dados
-    await initializeAdmin();   // Garante que o admin exista no banco
+    await connectToDataBase(); 
+    await initializeAdmin();   
   } catch (error) {
-    console.error('❌ Erro ao iniciar o servidor:', error);
+    console.error('Erro ao iniciar o servidor:', error);
   }
 });
 

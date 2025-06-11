@@ -100,22 +100,21 @@ const userSchema = new mongoose.Schema(
         },
         empreendedor: {
             type: Object,
-            default: null, // Esse objeto só será preenchido se o tipo for 'empreendedor'
+            default: null, 
         },
         avaliador: {
             type: Object,
-            default: null, // Esse objeto só será preenchido se o tipo for 'avaliador'
+            default: null, 
         },
     },
     { timestamps: true }
 );
 
-// Middleware para definir campos opcionais dependendo do tipo de usuário
 userSchema.pre('save', function (next) {
     if (this.tipo === 'empreendedor') {
-        this.avaliador = null; // Garante que os campos do avaliador fiquem nulos
+        this.avaliador = null; 
     } else if (this.tipo === 'avaliador') {
-        this.empreendedor = null; // Garante que os campos do empreendedor fiquem nulos
+        this.empreendedor = null; 
         this.avaliador = {
             monitorouStartup: this.monitorouStartup || '',
             descricaoIncubacao: this.descricaoIncubacao || '',

@@ -18,7 +18,7 @@ const announcementSchema = new mongoose.Schema({
         required: true,
     },
     arquivoEdital: {
-        type: String, // Aqui será salvo o caminho do arquivo PDF no servidor
+        type: String, 
         required: true,
     },
 }, { timestamps: true });

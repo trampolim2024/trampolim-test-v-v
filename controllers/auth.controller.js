@@ -32,7 +32,6 @@ export const signUp = async (req, res, next) => {
       avaliador
     } = req.body;
 
-    // Verificar se o usuário já existe
     const existingUser = await User.findOne({ email });
 
     if (existingUser) {
@@ -41,11 +40,9 @@ export const signUp = async (req, res, next) => {
       throw error;
     }
 
-    // Criptografar a senha
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(senha, salt);
 
-    // Preparar os dados do usuário conforme o tipo
     let userData = {
       nomeCompleto,
       grau_escolaridade,
@@ -67,14 +64,12 @@ export const signUp = async (req, res, next) => {
       tipo,
     };
 
-    // Preencher dados extras dependendo do tipo de usuário
     if (tipo === 'empreendedor') {
       userData.empreendedor = empreendedor || {};
     } else if (tipo === 'avaliador') {
       userData.avaliador = avaliador || {};
     }
 
-    // Criar o novo usuário
     const newUser = new User(userData);
 
     await newUser.save({ session });
@@ -104,7 +99,6 @@ export const signIn = async (req, res, next) => {
   try {
     const { email, senha } = req.body;
 
-    // Procurar o usuário no banco de dados
     const user = await User.findOne({ email });
 
     if (!user) {
@@ -113,7 +107,6 @@ export const signIn = async (req, res, next) => {
       throw error;
     }
 
-    // Verificar se a senha é válida
     const isPasswordValid = await bcrypt.compare(senha, user.senha);
 
     if (!isPasswordValid) {
@@ -122,7 +115,6 @@ export const signIn = async (req, res, next) => {
       throw error;
     }
 
-    // Gerar token JWT
     const token = jwt.sign({ userId: user._id }, JWT_SECRET, { expiresIn: JWT_EXPIRES_IN });
 
     res.status(200).json({
@@ -140,8 +132,6 @@ export const signIn = async (req, res, next) => {
 
 export const signOut = async (req, res, next) => {
   try {
-    // Para o logout, pode ser que você queira invalidar o token no lado do cliente,
-    // ou gerenciar sessões no backend (ex: blacklist de tokens), mas no JWT normalmente não é necessário fazer nada no backend.
     res.status(200).json({
       success: true,
       message: 'Usuário deslogado com sucesso',

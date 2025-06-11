@@ -5,12 +5,11 @@ import {
   getProjectById, 
   updateProject, 
   deleteProject,
-  getProjectsByUserId // Importe a nova função
+  getProjectsByUserId 
 } from '../controllers/project.controller.js';
 
 const projectRoutes = Router();
 
-// Rotas existentes
 projectRoutes.get('/', getAllProjects);
 projectRoutes.post('/', createProject);
 projectRoutes.get('/:id', getProjectById);

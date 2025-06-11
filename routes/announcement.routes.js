@@ -12,7 +12,6 @@ import { checkIfAnnouncementExists } from '../middlewares/announcement.middlewar
 
 const announcementRouter = Router();
 
-// Configuração do multer para upload de PDFs
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, 'uploads/');
@@ -32,7 +31,6 @@ const fileFilter = (req, file, cb) => {
 
 const upload = multer({ storage, fileFilter });
 
-// Rotas
 announcementRouter.get('/', getAllAnnouncements);
 announcementRouter.get('/:id', getAnnouncementById);
 announcementRouter.post('/', checkIfAnnouncementExists, upload.single('arquivoEdital'), createAnnouncement); 
