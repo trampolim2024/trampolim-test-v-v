@@ -4,8 +4,7 @@ import app from '../app';
 describe('POST /api/v1/projects - Validação de Link', () => {
   it('deve retornar erro ao submeter proposta com link de pitch inválido', async () => {
     const projeto = {
-      // ...outros campos obrigatórios
-      linkPitch: 'www.meupitch.com', // Formato inválido
+      linkPitch: 'www.meupitch.com',
       userId: new mongoose.Types.ObjectId(),
     };
 
